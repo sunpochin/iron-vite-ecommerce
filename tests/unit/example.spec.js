@@ -1,14 +1,14 @@
-import { expect, test } from 'vitest';
+
+import { shallowMount } from '@vue/test-utils';
+import { it, describe, expect, test } from 'vitest';
+import HelloWorld from '@/components/HelloWorld.vue'
+import HomeView from '@/components/HomeView.vue';
+
 test('Math.sqrt()', () => {
 	expect(Math.sqrt(4)).toBe(2);
 	expect(Math.sqrt(144)).toBe(12);
 	expect(Math.sqrt(2)).toBe(Math.SQRT2);
 });
-
-import { shallowMount } from '@vue/test-utils';
-import { it, before, describe } from 'vitest';
-import HelloWorld from '@/components/HelloWorld.vue'
-import HomeView from '@/components/HomeView.vue';
 
 describe('HelloWorld.vue', () => {
   it('renders props.msg when passed', () => {
