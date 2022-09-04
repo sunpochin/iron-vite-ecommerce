@@ -19,11 +19,11 @@ describe('HelloWorld.vue', () => {
     expect(wrapper.text()).toMatch(msg)
   })
 
-  it('renders props.msg when passed', () => {
-		const msg = 'Home view';
-		const wrapper = shallowMount(HomeView, {
-			props: { msg },
-		});
-		expect(wrapper.text()).toMatch(msg);
-	});
+  // it('Home view', () => {
+	// 	const msg = 'Home view';
+	// 	const wrapper = shallowMount(HomeView, {
+	// 		props: { msg },
+	// 	});
+	// 	expect(wrapper.text()).toMatch(msg);
+	// });
 })
