@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../components/HomeView.vue';
-import ProductsView from '../components/ProductsView.vue';
+// import ProductsView from '../components/OldProductsView.vue';
 import CartView from '../components/CartView.vue';
 
 import ProductList from '../components/products/ProductList.vue';
 import ProductDetail from '../components/products/ProductDetail.vue';
 
 const router = createRouter({
-	history: createWebHistory('/iron-vite-ecommerce/'),
+	// history: createWebHistory('/iron-vite-ecommerce/'),
+	history: createWebHistory('/'),
 	routes: [
 		{
 			path: '/',

@@ -7,9 +7,9 @@
 	<div class="upmost">
 		<div class="logo">Pseudo shop</div>
 		<nav>
-			<router-link to="/">Home</router-link> 
-			<router-link to="/products">Products</router-link> 
-			<router-link to="/cart">Cart</router-link> 
+			<router-link to="/">訂閱電子報</router-link>
+			<router-link to="/products">Products</router-link>
+			<router-link to="/cart">Cart</router-link>
 			<router-link to="/login">Login</router-link>
 		</nav>
 	</div>
@@ -57,13 +57,14 @@ nav {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	gap: 30px;
-	padding: 15px;
+	gap: 10px;
+	padding: 10px;
+	font-size: 10px;
 }
 
 nav a:hover {
 	transition: transform 0.9s ease-in-out;
-	transform: scale(1.4);
+	transform: scale(1.);
 	color: rgb(13, 195, 13);
 }
 
