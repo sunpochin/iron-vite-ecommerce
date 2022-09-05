@@ -33,10 +33,6 @@ export default createStore({
 	},
 
 	actions: {
-		// setLoggedIn(context, payload) {
-		// 	console.log('payload: ', payload);
-		// 	context.commit('setLoggedIn', { value: payload.value });
-		// },
 		login(context) {
 			context.commit('setLoggedIn', { value: true });
 		},

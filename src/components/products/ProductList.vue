@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import ProductCard from './ProductCard.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -20,7 +20,8 @@ export default {
 		ProductCard,
 	},
 	computed: {
-		...mapGetters(['getProducts']),
+		...mapGetters({ getProducts: 'getProducts' }),
+		...mapState(['products']),
 	},
 	props: {
 		msg: String,
@@ -28,11 +29,8 @@ export default {
 	methods: {
 		...mapActions({
 			setProducts: 'setProducts',
+			aliasPro: 'getProducts',
 		}),
-		getProducts() {
-			return [];
-			return this.$store.getters.getProducts();
-		},
 		async fetchProducts() {
 			const response = await axios.get('https://fakestoreapi.com/products');
 			// console.log('response: ', response);
@@ -50,11 +48,18 @@ export default {
 		},
 	},
 	mounted() {
-		const products = this.$store.getters.getProducts;
-		console.log('loaded products: ', products);
-		if (products.length === 0) {
+		console.log('loaded products: ', this.products);
+		if (this.products.length === 0) {
+			console.log('fetch!!');
 			this.fetchProducts();
 		}
+		// console.log('this.dondon: ', this.dondon);
+		// console.log('this.dondon length: ', this.dondon.length);
+		// console.log('this.aliasPro: ', this.aliasPro);
+		// console.log('this.aliasPro length: ', this.aliasPro.length);
+		// if (this.products.length === 0) {
+		// 	this.fetchProducts();
+		// }
 	},
 };
 </script>
