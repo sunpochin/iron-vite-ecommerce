@@ -29,6 +29,10 @@ export default {
 		...mapActions({
 			setProducts: 'setProducts',
 		}),
+		getProducts() {
+			return [];
+			return this.$store.getters.getProducts();
+		},
 		async fetchProducts() {
 			const response = await axios.get('https://fakestoreapi.com/products');
 			// console.log('response: ', response);
@@ -46,7 +50,11 @@ export default {
 		},
 	},
 	mounted() {
-		this.fetchProducts();
+		const products = this.$store.getters.getProducts;
+		console.log('loaded products: ', products);
+		if (products.length === 0) {
+			this.fetchProducts();
+		}
 	},
 };
 </script>
