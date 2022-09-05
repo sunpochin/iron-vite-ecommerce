@@ -23,14 +23,6 @@ export default {
 		},
 		async getme() {
 			const options = {
-				method: 'GET',
-				url: 'https://zappos1.p.rapidapi.com/products/detail',
-				params: { productId: '9143855' },
-				headers: {
-					'X-RapidAPI-Key':
-						'6d654c7548msh19ebd301762493fp146481jsn88174be05748',
-					'X-RapidAPI-Host': 'zappos1.p.rapidapi.com',
-				},
 			};
 
 			axios

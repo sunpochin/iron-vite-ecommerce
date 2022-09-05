@@ -5,11 +5,11 @@
 
 <template>
 	<div class="upmost">
-		<div class="logo">Logo</div>
+		<div class="logo">Pseudo shop</div>
 		<nav>
-			<router-link to="/">Home</router-link> |
-			<router-link to="/products">Products</router-link> |
-			<router-link to="/cart">Cart</router-link> |
+			<router-link to="/">Home</router-link> 
+			<router-link to="/products">Products</router-link> 
+			<router-link to="/cart">Cart</router-link> 
 			<router-link to="/login">Login</router-link>
 		</nav>
 	</div>
@@ -23,35 +23,6 @@
 	padding: 0;
 }
 
-/* ul {
-	padding: 0;
-	list-style-type: none;
-}
-
-hr {
-	border: 0;
-	border-top: 1px dotted #efefef;
-} */
-
-/* .card {
-	display: block;
-	padding: 0.75rem;
-	border: 1px solid #ddd;
-	box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
-	border-radius: 20px;
-}
-.card .card-title {
-	font-size: 1rem;
-	padding-bottom: 0.75rem;
-	font-weight: bold;
-}
-.card .card-body {
-	font-size: 1rem;
-}
-.card .card-body a {
-	text-decoration: underline;
-}
- */
 #app {
 	margin: 0;
 	padding: 0;
@@ -78,22 +49,16 @@ hr {
 
 	color: pink;
 	font-size: 32px;
+	padding: 1rem;
 }
 
 nav {
 	background-color: rgb(50, 50, 50);
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
+	align-items: center;
 	gap: 30px;
-	padding: 10px;
-}
-
-nav {
-	background-color: rgb(50, 50, 50);
-	display: flex;
-	justify-content: space-around;
-	gap: 30px;
-	padding: 10px;
+	padding: 15px;
 }
 
 nav a:hover {
