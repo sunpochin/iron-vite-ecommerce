@@ -1,24 +1,29 @@
-export interface ModuleItem {
+export interface ProductItem {
 	name: null | string;
 	serial_num: string;
 	count: number;
 }
 
 export interface CartItems {
-	itemsInCart: [ModuleItem];
+	itemsInCart: [ProductItem];
 }
 
 export const mutations = {
-	getItem(state: CartItems, payload: ModuleItem) {
-		const item = state.itemsInCart.filter((item) => {
-			item.serial_num === payload.serial_num;
-		});
-		// console.log('item found: ', item);
-		return item.length;
+	getItemCount(state: CartItems, payload: ProductItem) {
+		const found = state.itemsInCart.filter(function(item) 
+			{
+				if (item.serial_num === payload.serial_num ) {
+					return item;
+				}
+			}
+		);
+		console.log('item found: ', found);
+		return found.length;
 	},
-	addToCart(state: CartItems, payload: ModuleItem) {
-		// console.log('payload: ', payload);
+
+	addToCart(state: CartItems, payload: ProductItem) {
+		console.log('payload: ', payload);
 		state.itemsInCart.push(payload);
+		console.log('itemsInCart: ', state.itemsInCart);
 	},
 };
-

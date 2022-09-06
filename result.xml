@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+    <testsuite name="tests/unit/example.spec.js" timestamp="2022-09-06T03:35:40.702Z" hostname="pac-MS-7A69" tests="2" failures="0" errors="0" skipped="0" time="0.0150000000">
+        <testcase classname="tests/unit/example.spec.js" name="Math.sqrt()" time="0.0020000000">
+        </testcase>
+        <testcase classname="tests/unit/example.spec.js" name="HelloWorld.vue &gt; renders props.msg when passed" time="0.0130000000">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/calculator.spec.js" timestamp="2022-09-06T03:35:40.704Z" hostname="pac-MS-7A69" tests="2" failures="0" errors="0" skipped="0" time="0.0150000000">
+        <testcase classname="tests/unit/calculator.spec.js" name="Math.sqrt()" time="0.0020000000">
+        </testcase>
+        <testcase classname="tests/unit/calculator.spec.js" name="HelloWorld.vue &gt; renders props.msg when passed" time="0.0130000000">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/mutations.spec.ts" timestamp="2022-09-06T03:35:40.705Z" hostname="pac-MS-7A69" tests="3" failures="0" errors="0" skipped="0" time="0.0030000000">
+        <testcase classname="tests/unit/store/mutations.spec.ts" name="Add product &gt; add a product not in cart" time="0.0020000000">
+        </testcase>
+        <testcase classname="tests/unit/store/mutations.spec.ts" name="Add product &gt; add a product already in cart">
+        </testcase>
+        <testcase classname="tests/unit/store/mutations.spec.ts" name="Add product &gt; add to cart" time="0.0010000000">
+        </testcase>
+    </testsuite>
+</testsuites>
