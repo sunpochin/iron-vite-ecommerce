@@ -5,24 +5,40 @@ export interface ProductItem {
 }
 
 export interface CartItems {
-	itemsInCart: [ProductItem];
+	itemsInCart: ProductItem[];
 }
 
 export const mutations = {
-	getItemCount(state: CartItems, payload: ProductItem) {
-		const found = state.itemsInCart.filter((item) => 
-			item.serial_num === payload.serial_num 
-		);
-		console.log('item found: ', found);
-		return found.length;
+	getTotalCount(state: CartItems) {
+		const result = state.itemsInCart.reduce((acc, currentValue) => {
+			console.log('acc: ', acc);
+			console.log('currentValue: ', currentValue.count);
+			return acc + currentValue.count;
+		}, 0);
+		console.log('result: ', result);
+		return result;
+	},
+
+	getCategeryCount(state: CartItems) {
+		return state.itemsInCart.length;
 	},
 
 	addToCart(state: CartItems, payload: ProductItem) {
-		// console.log('payload: ', payload);
-		state.itemsInCart.push(payload);
+		const index = state.itemsInCart.findIndex((idx) => {
+			return idx.serial_num === payload.serial_num;
+		});
+		console.log('index: ', index);
+		if (index > -1) {
+			state.itemsInCart[index].count++;
+		} else {
+			const haha = [...state.itemsInCart, payload];
+			console.log('haha: ', haha);
+			state.itemsInCart.push(payload);
+			// state.itemsInCart = haha;
+		}
 		// console.log('itemsInCart: ', state.itemsInCart);
 	},
 };
 
-module.exports = { mutations }; 
-// export default { mutations }; 
+module.exports = { mutations };
+// export default { mutations };

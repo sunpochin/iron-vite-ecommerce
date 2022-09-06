@@ -19,32 +19,41 @@ describe('Add product', () => {
 	};
 
 	test("add a product not in cart", () => {
-		// add item 
-		let count = mutations.getItemCount(cartState, newItem);
+		// 購物「種類」+ 1
+		// 購物「總數」+ 1
 		let cateCount = mutations.getCategeryCount(cartState);
-		expect(count).to.equal(0);
+		let itemsCount = mutations.getTotalCount(cartState, newItem);
+		expect(cateCount).to.equal(0);
+		expect(itemsCount).to.equal(0);
 
 		mutations.addToCart(cartState, newItem);
-		let afterCount = mutations.getItemCount(cartState, newItem);
+
 		let afterCateCount = mutations.getCategeryCount(cartState);
+		let afterCount = mutations.getTotalCount(cartState);
 
 		expect(afterCount).to.equal(1);
-		expect(afterCateCount).to.equal(cateCount);
+		expect(afterCateCount).to.equal(1);
 	});
 
 	test('add a product already in cart', async () => {
-		// total count should + 1
-		// but Category count should remain the same.
-		let count = mutations.getItemCount(cartState, newItem);
+		// Category count should remain the same.
+		// The count of added category should += 1.
+		// Total count should += 1
+		// 購物「種類」不改變
+		// 購物「總數」+= 1
+		let count = mutations.getTotalCount(cartState);
 		let cateCount = mutations.getCategeryCount(cartState);
+		let countBy = mutations.getCountBy(cartState, newItem);
 		console.log('origin count: ', count);
+
 		mutations.addToCart(cartState, newItem);
-		let afterCount = mutations.getItemCount(cartState, newItem);
+
+		let afterCount = mutations.getTotalCount(cartState);
 		let afterCateCount = mutations.getCategeryCount(cartState);
+		let afterCountBy = mutations.getCountBy(cartState, newItem);
 		expect(afterCount).to.equal(count + 1);
 		expect(afterCateCount).to.equal(cateCount);
-
-
+		expect(afterCountBy).to.equal(countBy + 1);
 	});
 
 	it('add to cart', async () => {

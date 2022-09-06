@@ -16,7 +16,9 @@
 	"dependencies": {
 		"@badeball/cypress-cucumber-preprocessor": "^12.1.0",
 		"@cypress/webpack-preprocessor": "^5.12.2",
+		"@popperjs/core": "^2.11.6",
 		"axios": "^0.27.2",
+		"bootstrap": "^5.2.0",
 		"vue": "^3.2.37",
 		"vue-router": "^4.1.5",
 		"vuex": "^4.0.2"
