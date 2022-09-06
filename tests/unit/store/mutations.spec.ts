@@ -1,8 +1,8 @@
 // mutations.spec.ts
 import { it, describe, expect, test } from 'vitest';
 import { mutations, ModuleItem, CartItems } from '@/store/mutations';
-import { game } from '@/store/game/game';
-import store from '@/store';
+// import { game } from '@/store/game/game';
+// import store from '@/store';
 // destructure assign `mutations`
 const { addToCart } = mutations;
 
@@ -20,16 +20,31 @@ describe('Add product', () => {
 
 	test("add a product not in cart", () => {
 		// add item 
-		let ret = mutations.getItemCount(cartState, newItem);
-		expect(ret).to.equal(0);
+		let count = mutations.getItemCount(cartState, newItem);
+		let cateCount = mutations.getCategeryCount(cartState);
+		expect(count).to.equal(0);
 
 		mutations.addToCart(cartState, newItem);
-		ret = mutations.getItemCount(cartState, newItem);
+		let afterCount = mutations.getItemCount(cartState, newItem);
+		let afterCateCount = mutations.getCategeryCount(cartState);
 
-		expect(ret).to.equal(1);
+		expect(afterCount).to.equal(1);
+		expect(afterCateCount).to.equal(cateCount);
 	});
+
 	test('add a product already in cart', async () => {
-		// 	expect(state.count).to.equal(1);
+		// total count should + 1
+		// but Category count should remain the same.
+		let count = mutations.getItemCount(cartState, newItem);
+		let cateCount = mutations.getCategeryCount(cartState);
+		console.log('origin count: ', count);
+		mutations.addToCart(cartState, newItem);
+		let afterCount = mutations.getItemCount(cartState, newItem);
+		let afterCateCount = mutations.getCategeryCount(cartState);
+		expect(afterCount).to.equal(count + 1);
+		expect(afterCateCount).to.equal(cateCount);
+
+
 	});
 
 	it('add to cart', async () => {

@@ -10,20 +10,19 @@ export interface CartItems {
 
 export const mutations = {
 	getItemCount(state: CartItems, payload: ProductItem) {
-		const found = state.itemsInCart.filter(function(item) 
-			{
-				if (item.serial_num === payload.serial_num ) {
-					return item;
-				}
-			}
+		const found = state.itemsInCart.filter((item) => 
+			item.serial_num === payload.serial_num 
 		);
 		console.log('item found: ', found);
 		return found.length;
 	},
 
 	addToCart(state: CartItems, payload: ProductItem) {
-		console.log('payload: ', payload);
+		// console.log('payload: ', payload);
 		state.itemsInCart.push(payload);
-		console.log('itemsInCart: ', state.itemsInCart);
+		// console.log('itemsInCart: ', state.itemsInCart);
 	},
 };
+
+module.exports = { mutations }; 
+// export default { mutations }; 
