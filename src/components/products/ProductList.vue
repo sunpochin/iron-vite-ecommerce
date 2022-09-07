@@ -43,7 +43,7 @@ export default {
 			// 		product.category === `women's clothing`
 			// );
 
-			this.setProducts({ value: data });
+			this.setProducts(data);
 			return data;
 		},
 	},

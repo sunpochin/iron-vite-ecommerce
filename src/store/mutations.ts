@@ -1,26 +1,44 @@
+export interface ProductItem {
+	id: string;
+	name: null | string;
+	count: number;
+}
+
+export interface State {
+	productsList: ProductItem[];
+	isLoggedIn: boolean;
+	itemsInCart: ProductItem[];
+}
+
 export default {
-	setProducts(state, payload) {
-		console.log('setProducts: ', payload.value);
-		state.productsList = payload.value;
+	setProducts(state: State, payload: ProductItem[]) {
+		console.log('setProducts: ', payload);
+		state.productsList = payload;
 	},
 	// add an item into cart.
-	addToCart(state, payload) {
+	addToCart(state: State, payload: ProductItem) {
 		const index = state.itemsInCart.findIndex((idx) => {
 			return idx.id === payload.id;
 		});
-		console.log('index: ', index);
+		console.log('addToCart index: ', index);
 		if (index > -1) {
+			console.log('state.itemsInCart: ', state.itemsInCart);
 			state.itemsInCart[index].count++;
+			console.log(
+				'state.itemsInCart[index].count: ',
+				state.itemsInCart[index].count
+			);
 		} else {
-			const haha = [...state.itemsInCart, payload];
-			console.log('haha: ', haha);
+			payload.count = 1;
+			// [...state.itemsInCart, payload];
+			// console.log('newitem: ', newitem);
+
+			console.log('payload: ', payload);
 			state.itemsInCart.push(payload);
-			// state.itemsInCart = haha;
 		}
 		// console.log('itemsInCart: ', state.itemsInCart);
 	},
 };
-
 
 // export interface ProductItem {
 // 	id: string;

@@ -1,8 +1,4 @@
 import { createStore } from 'vuex';
-// import rootMutations from './mutations';
-// import rootActions from './actions';
-// import counterModule from './counter/index.js';
-// import rootGetters from './getters';
 // export interface ProductItem {
 // 	id: string;
 // 	name: null | string;
@@ -12,19 +8,17 @@ import { createStore } from 'vuex';
 // export interface CartItems {
 // 	itemsInCart: ProductItem[];
 // }
-
 // export interface ProductsList {
 // 	productsList: ProductItem[];
 // }
 import cartGetters from './getters';
 import cartMutations from './mutations';
 import cartActions from './actions';
-export interface State {
-	count: number;
-	productsList: [];
-	isLoggedIn: boolean;
-	itemsInCart: [];
-}
+// export interface State {
+// 	productsList: ProductItem[];
+// 	isLoggedIn: boolean;
+// 	itemsInCart: ProductItem[];
+// }
 
 export default createStore<State>({
 	// modules: {
@@ -44,20 +38,6 @@ export default createStore<State>({
 	},
 	mutations: cartMutations,
 	actions: cartActions,
-	// {
-	// 	login(context) {
-	// 		context.commit('setLoggedIn', { value: true });
-	// 	},
-	// 	logout(context) {
-	// 		context.commit('setLoggedIn', { value: false });
-	// 	},
-	// 	setProducts(context, payload) {
-	// 		context.commit('setProducts', payload);
-	// 	},
-	// 	setCurProduct(context, payload) {
-	// 		context.commit('setCurProduct', payload);
-	// 	},
-	// },
 	getters: cartGetters,
 });
 
