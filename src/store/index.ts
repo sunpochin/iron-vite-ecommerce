@@ -18,7 +18,7 @@ import { createStore } from 'vuex';
 // }
 import cartGetters from './getters';
 import cartMutations from './mutations';
-
+import cartActions from './actions';
 export interface State {
 	count: number;
 	productsList: [];
@@ -43,20 +43,21 @@ export default createStore<State>({
 		};
 	},
 	mutations: cartMutations,
-	actions: {
-		login(context) {
-			context.commit('setLoggedIn', { value: true });
-		},
-		logout(context) {
-			context.commit('setLoggedIn', { value: false });
-		},
-		setProducts(context, payload) {
-			context.commit('setProducts', payload);
-		},
-		setCurProduct(context, payload) {
-			context.commit('setCurProduct', payload);
-		},
-	},
+	actions: cartActions,
+	// {
+	// 	login(context) {
+	// 		context.commit('setLoggedIn', { value: true });
+	// 	},
+	// 	logout(context) {
+	// 		context.commit('setLoggedIn', { value: false });
+	// 	},
+	// 	setProducts(context, payload) {
+	// 		context.commit('setProducts', payload);
+	// 	},
+	// 	setCurProduct(context, payload) {
+	// 		context.commit('setCurProduct', payload);
+	// 	},
+	// },
 	getters: cartGetters,
 });
 

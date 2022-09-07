@@ -1,16 +1,8 @@
 // mutations.spec.ts
 import { it, describe, expect, test, beforeAll } from 'vitest';
-// import {
-// 	mutations,
-// 	ModuleItem,
-// 	CartItems,
-// 	ProductsList,
-// 	setProducts,
-// } from '@/store/mutations';
-
 import mutations from '@/store/mutations';
+import actions from '@/store/actions';
 import getters from '@/store/getters';
-
 import axios from 'axios';
 
 // import { game } from '@/store/game/game';
@@ -95,14 +87,3 @@ describe('Add product', () => {
 	it('add to cart', async () => {});
 });
 
-// describe('game mutations', () => {
-// 	const state = {
-// 		gameScore: 0,
-// 		gamePanic: 0,
-// 		gameTimeout: 0,
-// 	};
-// 	it('add to cart', () => {
-// 		console.log('game: ', game);
-// 		game.mutations.addGameScore(state, 1);
-// 	});
-// });
