@@ -3,8 +3,30 @@ import { createStore } from 'vuex';
 // import rootActions from './actions';
 // import counterModule from './counter/index.js';
 // import rootGetters from './getters';
+// export interface ProductItem {
+// 	id: string;
+// 	name: null | string;
+// 	count: number;
+// }
 
-export default createStore({
+// export interface CartItems {
+// 	itemsInCart: ProductItem[];
+// }
+
+// export interface ProductsList {
+// 	productsList: ProductItem[];
+// }
+import cartGetters from './getters';
+import cartMutations from './mutations';
+
+export interface State {
+	count: number;
+	productsList: [];
+	isLoggedIn: boolean;
+	itemsInCart: [];
+}
+
+export default createStore<State>({
 	// modules: {
 	// 	numbers: counterModule,
 	// },
@@ -14,24 +36,13 @@ export default createStore({
 	state() {
 		return {
 			count: 0,
-			products: [],
+			productsList: [],
 			isLoggedIn: false,
 			curProduct: null,
+			itemsInCart: [],
 		};
 	},
-	mutations: {
-		setLoggedIn(state, payload) {
-			state.isLoggedIn = payload.value;
-		},
-		setProducts(state, payload) {
-			console.log('mutations payload: ', payload);
-			state.products = payload.value;
-		},
-		setCurProduct(state, payload) {
-			state.curProduct = payload.value;
-		},
-	},
-
+	mutations: cartMutations,
 	actions: {
 		login(context) {
 			context.commit('setLoggedIn', { value: true });
@@ -46,20 +57,7 @@ export default createStore({
 			context.commit('setCurProduct', payload);
 		},
 	},
-	getters: {
-		counter(state) {
-			return state.count;
-		},
-		IsLoggedIn(state) {
-			return state.isLoggedIn;
-		},
-		getProducts(state) {
-			return state.products;
-		},
-		getCurProduct(state) {
-			return state.curProduct;
-		},
-	},
+	getters: cartGetters,
 });
 
 // https://stackoverflow.com/questions/34645731/export-more-than-one-variable-in-es6

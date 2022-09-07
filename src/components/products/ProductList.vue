@@ -21,7 +21,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({ getProducts: 'getProducts' }),
-		...mapState(['products']),
+		...mapState(['productsList']),
 	},
 	props: {
 		msg: String,
@@ -35,21 +35,21 @@ export default {
 			const response = await axios.get('https://fakestoreapi.com/products');
 			// console.log('response: ', response);
 			let data = response.data;
-			console.log('data: ', data);
+			console.log('fetch data: ', data);
 
-			data = data.filter(
-				(product) =>
-					product.category === `men's clothing` ||
-					product.category === `women's clothing`
-			);
+			// data = data.filter(
+			// 	(product) =>
+			// 		product.category === `men's clothing` ||
+			// 		product.category === `women's clothing`
+			// );
 
 			this.setProducts({ value: data });
 			return data;
 		},
 	},
 	mounted() {
-		console.log('loaded products: ', this.products);
-		if (this.products.length === 0) {
+		console.log('loaded products: ', this.productsList);
+		if (this.productsList.length === 0) {
 			console.log('fetch!!');
 			this.fetchProducts();
 		}
