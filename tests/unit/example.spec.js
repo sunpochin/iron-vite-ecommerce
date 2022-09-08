@@ -1,8 +1,6 @@
-
 import { shallowMount } from '@vue/test-utils';
 import { it, describe, expect, test } from 'vitest';
-import HelloWorld from '@/components/HelloWorld.vue'
-import HomeView from '@/components/HomeView.vue';
+import CartCard from '@/components/carts/CartCard.vue';
 
 test('Math.sqrt()', () => {
 	expect(Math.sqrt(4)).toBe(2);
@@ -10,20 +8,12 @@ test('Math.sqrt()', () => {
 	expect(Math.sqrt(2)).toBe(Math.SQRT2);
 });
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'HelloWorld';
-    const wrapper = shallowMount(HelloWorld, {
-			props: { msg },
-		});
-    expect(wrapper.text()).toMatch(msg)
-  })
-
-  // it('Home view', () => {
-	// 	const msg = 'Home view';
-	// 	const wrapper = shallowMount(HomeView, {
-	// 		props: { msg },
-	// 	});
-	// 	expect(wrapper.text()).toMatch(msg);
-	// });
-})
+// describe('CartCard.vue', () => {
+// 	it('renders props.msg when passed', () => {
+// 		const msg = 'CartCard';
+// 		const wrapper = shallowMount(CartCard, {
+// 			props: { msg },
+// 		});
+// 		expect(wrapper.text()).toMatch(msg);
+// 	});
+// });

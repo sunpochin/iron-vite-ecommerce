@@ -4,32 +4,44 @@ import mutations from '@/store/mutations';
 import actions from '@/store/actions';
 import getters from '@/store/getters';
 import axios from 'axios';
+import productJson from '@/assets/products.json'
 
 // import { game } from '@/store/game/game';
 // import store from '@/store';
 // destructure assign `mutations`
 // const { addToCart } = mutations;
-	const cartState: CartItems = {
-		itemsInCart: [],
-	};
-	const productsState: ProductsList = {
-		productsList: [],
-	};
+const cartState: CartItems = {
+	itemsInCart: [],
+};
+const productsState: ProductsList = {
+	productsList: [],
+};
 
 describe('Add product', () => {
 	beforeAll(async () => {
 		console.log('before all');
-		const response = await axios.get('https://fakestoreapi.com/products');
-		// console.log('response: ', response);
-		let data = response.data;
-		console.log('data: ', data);
+		// use local data instead, faster.
+		let data = productJson;
+		// console.log('productJson: ', productJson);
+		// const response = await axios.get('https://fakestoreapi.com/products');
+		// // console.log('response: ', response);
 
-		data = data.filter(
-			(product) =>
-				product.category === `men's clothing` ||
-				product.category === `women's clothing`
-		);
-		mutations.setProducts(productsState, { value: data });
+		// let data;
+		// fetch('file.txt')
+		// 	.then((response) => response.text())
+		// 	.then((text) => {
+		// 		console.log(text);
+		// 		data = text;
+		// 	});
+		// // let data = response.data;
+		// // console.log('data: ', data);
+
+		// data = data.filter(
+		// 	(product) =>
+		// 		product.category === `men's clothing` ||
+		// 		product.category === `women's clothing`
+		// );
+		mutations.setProducts(productsState, data);
 	});
 
 	const newItem = {
@@ -41,7 +53,7 @@ describe('Add product', () => {
 	};
 	test('getProducts', () => {
 		let list = getters.getProducts(productsState);
-		console.log('list: ', list);
+		console.log('getProducts list: ', list.slice(0, 3));
 	});
 	test('add a product not in cart', () => {
 		// 購物「種類」+ 1
@@ -86,4 +98,3 @@ describe('Add product', () => {
 
 	it('add to cart', async () => {});
 });
-

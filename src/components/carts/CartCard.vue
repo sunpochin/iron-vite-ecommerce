@@ -27,9 +27,9 @@ export default {
 	props: {
 		cartItem: Object,
 	},
-	mounted() {
-		// console.log('cartItem: ', this.cartItem);
-	},
+	// mounted() {
+	// 	console.log('cartItem: ', this.cartItem);
+	// },
 };
 </script>
 

@@ -12,7 +12,7 @@ export interface State {
 
 export default {
 	setProducts(state: State, payload: ProductItem[]) {
-		console.log('setProducts: ', payload);
+		// console.log('setProducts: ', payload);
 		state.productsList = payload;
 	},
 	// add an item into cart.
