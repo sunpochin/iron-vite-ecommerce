@@ -1,10 +1,13 @@
 <template>
 	<div class="cartItem-card">
-		<image-container :cartItem="cartItem"></image-container>
-		<div>{{ cartItem.id }}</div>
+		<!-- <image-container :item="cartItem"></image-container> -->
+		<!-- <div>{{ cartItem.id }}</div> -->
 		<div class="card-title">{{ cartItem.title }}</div>
-		<div>{{ cartItem.description }}</div>
-		<div>{{ cartItem.price }}</div>
+		<div class="card-image">
+			<img :src="cartItem.image" />
+		</div>
+		<div>Price: {{ cartItem.price }}</div>
+		<div>Count: {{ cartItem.count }}</div>
 
 		<!-- <div class="row">
 			<router-link
@@ -34,9 +37,17 @@ export default {
 .cartItem-card {
 	display: flex;
 	width: 100%;
-	gap: 30px;
+	gap: 3px;
+	border: 1px solid red;
+	border-radius: 10px;
 }
-
+.card-title {
+	width: 150px;
+}
+.card-image {
+	height: 150px;
+	width: 150px;
+}
 /* .row {
 	margin-bottom: 10px;
 }
@@ -57,5 +68,5 @@ export default {
 	html {
 		font-size: 55%;
 	}
-} */
+} */ ;
 </style>

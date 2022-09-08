@@ -14,6 +14,10 @@ export default {
 		return state.itemsInCart.length;
 	},
 
+	getCartItems(state) {
+		return state.itemsInCart;
+	},
+
 	// get the count
 	getCountBy(state, payload) {
 		const index = state.itemsInCart.findIndex((idx) => {
