@@ -33,6 +33,7 @@ const state: State = {
 export enum MutationTypes {
 	INC_COUNTER = 'SET_COUNTER',
 	ADD_TO_CART = 'addToCart',
+	REMOVE_ITEM = 'removeItem',
 	SET_PRODUCTS = 'setProducts',
 }
 
@@ -44,6 +45,7 @@ export enum ActionTypes {
 export type Mutations<S = State> = {
 	[MutationTypes.INC_COUNTER](state: S, payload: number): void;
 	[MutationTypes.ADD_TO_CART](state: S, payload: ProductItem): void;
+	[MutationTypes.REMOVE_ITEM](state: S, payload: ProductItem): void;
 	[MutationTypes.SET_PRODUCTS](state: S, payload: ProductItem[]): void;
 };
 
@@ -52,7 +54,6 @@ const mutations: MutationTree<State> & Mutations = {
 	[MutationTypes.INC_COUNTER](state: State, payload: number) {
 		state.counter += payload;
 	},
-
 	[MutationTypes.ADD_TO_CART](state: State, payload: ProductItem) {
 		// state.counter += payload;
 		const index = state.itemsInCart.findIndex((idx: any) => {
@@ -75,6 +76,30 @@ const mutations: MutationTree<State> & Mutations = {
 			state.itemsInCart.push(payload);
 		}
 		// console.log('itemsInCart: ', state.itemsInCart);
+	},
+	[MutationTypes.REMOVE_ITEM](state: State, payload: ProductItem) {
+		const index = state.itemsInCart.findIndex((idx) => {
+			return idx.id === payload.id;
+		});
+		// console.log('removeItem index: ', index);
+		if (index > -1) {
+			console.log('state.itemsInCart: ', state.itemsInCart);
+			state.itemsInCart[index].count--;
+			if (state.itemsInCart[index].count <= 0) {
+				state.itemsInCart.splice(index, 1);
+			}
+			state.itemsInCart = state.itemsInCart;
+			// console.log(
+			// 	'state.itemsInCart[index].count: ',
+			// 	state.itemsInCart[index].count
+			// );
+		} else {
+			payload.count = 1;
+			// [...state.itemsInCart, payload];
+			// console.log('newitem: ', newitem);
+			console.log('payload: ', payload);
+			state.itemsInCart.push(payload);
+		}
 	},
 
 	[MutationTypes.SET_PRODUCTS](state: State, payload: ProductItem[]) {
