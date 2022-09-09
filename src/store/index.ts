@@ -10,7 +10,7 @@ import {
 	createLogger,
 } from 'vuex';
 
-import { ProductItem, State } from '@/store/types';
+import { ProductItem, State, ProductsList } from '@/store/types';
 
 //declare state
 // export type State = {
@@ -58,20 +58,20 @@ const mutations: MutationTree<State> & Mutations = {
 		const index = state.itemsInCart.findIndex((idx: any) => {
 			return idx.id === payload.id;
 		});
-		console.log('addToCart index: ', index);
+		// console.log('addToCart index: ', index);
 		if (index > -1) {
 			console.log('state.itemsInCart: ', state.itemsInCart);
 			state.itemsInCart[index].count++;
 			state.itemsInCart = state.itemsInCart;
-			console.log(
-				'state.itemsInCart[index].count: ',
-				state.itemsInCart[index].count
-			);
+			// console.log(
+			// 	'state.itemsInCart[index].count: ',
+			// 	state.itemsInCart[index].count
+			// );
 		} else {
 			payload.count = 1;
 			// [...state.itemsInCart, payload];
 			// console.log('newitem: ', newitem);
-			console.log('payload: ', payload);
+			// console.log('payload: ', payload);
 			state.itemsInCart.push(payload);
 		}
 		// console.log('itemsInCart: ', state.itemsInCart);
@@ -110,19 +110,23 @@ export const actions: ActionTree<State, State> & Actions = {
 export type Getters = {
 	doubleCounter(state: State): number;
 	getCartItems(state: State): ProductItem[];
+	getProducts(state: State): ProductItem[];
 };
 
 //getters
 
 export const getters: GetterTree<State, State> & Getters = {
 	doubleCounter: (state) => {
-		console.log('state', state.counter);
+		// console.log('state', state.counter);
 		return state.counter * 2;
 	},
 	getCartItems: (state) => {
 		return state.itemsInCart;
-	}
-	
+	},
+	getProducts: (state) => {
+		console.log('getter getProducts: ', state.productsList);
+		return state.productsList;
+	},
 };
 
 //setup store type

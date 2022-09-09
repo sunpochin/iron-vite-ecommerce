@@ -3,7 +3,7 @@
 	<h1>{{ msg }}</h1>
 	<div class="outer">
 		<div class="product-list">
-			<div v-for="product in getProducts" :key="product.id">
+			<div v-for="product in listProducts" :key="product.id">
 				<ProductCard :product="product" />
 			</div>
 		</div>
@@ -26,7 +26,12 @@ export default defineComponent({
 		// 	const store = useStore();
 		// 	this.store;
 		// },
-		...mapGetters({ getProducts: 'getProducts' }),
+		listProducts() {
+			console.log('mama: ', store.getters.getProducts);
+			console.log('mama: ', store.getters.getProducts.data);
+			return store.getters.getProducts.data;
+		},
+		...mapGetters({ aliasPro: 'getProducts' }),
 		...mapState(['productsList']),
 	},
 	props: {
@@ -35,26 +40,12 @@ export default defineComponent({
 	methods: {
 		...mapActions({
 			setProducts: 'setProducts',
-			// aliasPro: 'getProducts',
+			aliasPro: 'getProducts',
 		}),
 		haha(pro: any) {
 			store.commit('setProducts', pro);
+			console.log('aliasPro: ', store.getters.getProducts);
 		},
-		// async fetchProducts() {
-		// 	const response = await axios.get('https://fakestoreapi.com/products');
-		// 	// console.log('response: ', response);
-		// 	let data = response.data;
-		// 	console.log('fetch data: ', data);
-
-		// 	// data = data.filter(
-		// 	// 	(product) =>
-		// 	// 		product.category === `men's clothing` ||
-		// 	// 		product.category === `women's clothing`
-		// 	// );
-
-		// 	this.setProducts(data);
-		// 	return data;
-		// },
 	},
 	async mounted() {
 		console.log('loaded products: ', this.productsList);

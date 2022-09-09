@@ -1,6 +1,7 @@
 export type ProductItem = {
 	id: string;
-	title: null | string;
+	title: string;
+	description: string;
 	count: number;
 	price: number;
 	image: any;

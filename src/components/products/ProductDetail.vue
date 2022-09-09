@@ -16,14 +16,12 @@ import { mapActions, useStore } from 'vuex';
 import ImageContainer from './ImageContainer.vue';
 import { defineComponent, ref } from 'vue';
 import { ProductItem, State } from '@/store/types';
+import { store } from '@/store';
 
 export default defineComponent({
-	setup() {
-		const store = useStore();
-	},
 	data() {
 		return {
-			product: Object,
+			product: Object(),	// todo: using Object (instead of Object() ) will cause a build error
 		};
 	},
 	components: {
@@ -32,7 +30,6 @@ export default defineComponent({
 	props: ['productId'],
 	methods: {
 		addToCart() {
-			const store = useStore();
 			store.commit('addToCart', this.product);
 		},
 		...mapActions({
