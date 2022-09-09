@@ -28,8 +28,8 @@ export default defineComponent({
 		// },
 		listProducts() {
 			console.log('mama: ', store.getters.getProducts);
-			console.log('mama: ', store.getters.getProducts.data);
-			return store.getters.getProducts.data;
+			console.log('mama data: ', store.getters.getProducts.data);
+			return store.getters.getProducts;
 		},
 		...mapGetters({ aliasPro: 'getProducts' }),
 		...mapState(['productsList']),
@@ -55,9 +55,9 @@ export default defineComponent({
 		}
 		const { getJsonData, theJson } = CommonMixin();
 		// console.log('retProductJson: ', retProductJson);
-		const data = await getJsonData('public/products.json');
-		console.log('mounted data: ', data);
-		this.haha(data);
+		// const data = await getJsonData('public/products.json');
+		console.log('mounted data: ', theJson);
+		this.haha(theJson);
 	},
 });
 </script>
