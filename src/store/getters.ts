@@ -14,11 +14,14 @@ export default {
 		return state.itemsInCart.length;
 	},
 	getSubTotal(state) {
-		console.log('getSubTotal');
-		return state.itemsInCart.reduce((acc, curItem) => {
-			return acc + curItem.price;
-		}, 0);
-		// return subTotal;
+		const ret = state.itemsInCart
+			.reduce((acc, curItem) => {
+				return acc + curItem.price * curItem.count;
+			}, 0)
+			.toFixed(2);
+		console.log('getSubTotal: state.itemsInCart: ', state.itemsInCart);
+		console.log('getSubTotal: ', ret);
+		return ret;
 	},
 	getCartItems(state) {
 		return state.itemsInCart;

@@ -17,9 +17,6 @@ export default {
 	},
 	// add an item into cart.
 	addToCart(state: State, payload: ProductItem) {
-		let itemsInCart = [state.itemsInCart];
-
-
 		const index = state.itemsInCart.findIndex((idx) => {
 			return idx.id === payload.id;
 		});
@@ -36,7 +33,6 @@ export default {
 			payload.count = 1;
 			// [...state.itemsInCart, payload];
 			// console.log('newitem: ', newitem);
-
 			console.log('payload: ', payload);
 			state.itemsInCart.push(payload);
 		}

@@ -66,11 +66,11 @@ export default {
 		CartCard,
 	},
 	computed: {
-		getSubTotal() {
-			return this.$store.getters.getSubTotal;
-		},
 		getCartProducts() {
 			return this.$store.getters.getCartItems;
+		},
+		getSubTotal() {
+			return this.$store.getters.getSubTotal;
 		},
 		...mapState(['productsList']),
 	},
