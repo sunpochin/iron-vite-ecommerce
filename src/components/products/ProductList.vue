@@ -13,8 +13,8 @@
 <script lang="ts">
 import ProductCard from './ProductCard.vue';
 import { mapActions, useStore, mapGetters, mapState } from 'vuex';
-import CommonMixin from '@/utils/CommonMixin.ts';
-import { ProductItem, State } from './types';
+import CommonMixin from '@/utils/CommonMixin';
+import { ProductItem, State } from '@/store/types';
 import { defineComponent, ref } from 'vue';
 import { store } from '@/store';
 export default defineComponent({
@@ -62,9 +62,9 @@ export default defineComponent({
 			console.log('fetch!!');
 			// this.fetchProducts();
 		}
-		const { getJsonData, retProductJson } = CommonMixin();
+		const { getJsonData, theJson } = CommonMixin();
 		// console.log('retProductJson: ', retProductJson);
-		const { data } = await getJsonData('public/products.json');
+		const data = await getJsonData('public/products.json');
 		console.log('mounted data: ', data);
 		this.haha(data);
 	},

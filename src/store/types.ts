@@ -3,6 +3,7 @@ export type ProductItem = {
 	title: null | string;
 	count: number;
 	price: number;
+	image: any;
 }
 
 export type ProductsList = {
@@ -15,7 +16,9 @@ export type ProductsList = {
 // 	itemsInCart: ProductItem[];
 // }
 // define your typings for the store state
+
 export type State = {
+	counter: number;
 	isLoggedIn: false;
 	productsList: ProductItem[];
 	itemsInCart: ProductItem[];

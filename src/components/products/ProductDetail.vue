@@ -15,7 +15,7 @@
 import { mapActions, useStore } from 'vuex';
 import ImageContainer from './ImageContainer.vue';
 import { defineComponent, ref } from 'vue';
-import { ProductItem, State } from './types';
+import { ProductItem, State } from '@/store/types';
 
 export default defineComponent({
 	setup() {
