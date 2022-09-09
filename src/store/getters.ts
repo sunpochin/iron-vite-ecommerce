@@ -1,6 +1,8 @@
+import { State, ProductItem } from './types';
+
 export default {
-	getTotalCount(state) {
-		return state.itemsInCart.reduce((acc, curItem) => {
+	getTotalCount(state: State) {
+		return state.itemsInCart.reduce((acc: any, curItem: any) => {
 			console.log('acc: ', acc);
 			console.log('curItem: ', curItem.count);
 			return acc + curItem.count;
@@ -10,12 +12,12 @@ export default {
 	},
 
 	// get the count of categories in cart.
-	getCategoryCount(state) {
+	getCategoryCount(state: State) {
 		return state.itemsInCart.length;
 	},
-	getSubTotal(state) {
+	getSubTotal(state: State) {
 		const ret = state.itemsInCart
-			.reduce((acc, curItem) => {
+			.reduce((acc: any, curItem: any) => {
 				return acc + curItem.price * curItem.count;
 			}, 0)
 			.toFixed(2);
@@ -23,12 +25,12 @@ export default {
 		console.log('getSubTotal: ', ret);
 		return ret;
 	},
-	getCartItems(state) {
+	getCartItems(state: State) {
 		return state.itemsInCart;
 	},
 	// get the count
-	getCountBy(state, payload) {
-		const index = state.itemsInCart.findIndex((idx) => {
+	getCountBy(state: State, payload: any) {
+		const index = state.itemsInCart.findIndex((idx: any) => {
 			return idx.id === payload.id;
 		});
 		console.log('getCountBy: ', index);
@@ -42,17 +44,14 @@ export default {
 		return ret;
 	},
 
-	counter(state) {
-		return state.count;
-	},
-	IsLoggedIn(state) {
+	IsLoggedIn(state: State) {
 		return state.isLoggedIn;
 	},
-	getProducts(state) {
+	getProducts(state: State) {
 		console.log('getter getProducts: ', state);
 		return state.productsList;
 	},
-	getCurProduct(state) {
-		return state.curProduct;
-	},
+	// getCurProduct(state: State) {
+	// 	return state.curProduct;
+	// },
 };

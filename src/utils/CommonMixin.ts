@@ -1,10 +1,12 @@
 import axios from 'axios';
-import productJson from '@/assets/products.json';
-import { mapActions, mapGetters, mapState } from 'vuex';
+// import json = require('@/assets/products.json');
+
+import theJson from '@/assets/products.json';
+// import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default function () {
 	let responseData = null;
-	const getJsonData = async function (file) {
+	const getJsonData = async function (file: any) {
 		try {
 			responseData = await axios.get(file);
 			let data = responseData.data;
@@ -15,6 +17,6 @@ export default function () {
 		}
 	};
 
-	const retProductJson = productJson;
-	return { getJsonData, retProductJson };
+	return { getJsonData, theJson };
+	// return { getJsonData };
 }

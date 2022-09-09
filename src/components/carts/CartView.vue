@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
 	<div class="containerTable">
 		<table>
@@ -57,20 +55,24 @@
 </template>
 
 <script lang="ts">
+import { State, ProductItem } from '@/store/types';
+
 import CartCard from './CartCard.vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
-import CommonMixin from '@/utils/CommonMixin.js';
+import CommonMixin from '@/utils/CommonMixin';
+import { store } from '../../store';
+import { defineComponent, ref } from 'vue';
 
-export default {
+export default defineComponent({
 	components: {
 		CartCard,
 	},
 	computed: {
-		getCartProducts() {
-			return this.$store.getters.getCartItems;
+		getCartProducts(): ProductItem[] {
+			return store.getters.getCartItems;
 		},
-		getSubTotal() {
-			return this.$store.getters.getSubTotal;
+		getSubTotal(): any {
+			return store.getters.getSubTotal;
 		},
 		...mapState(['productsList']),
 	},
@@ -80,17 +82,17 @@ export default {
 		};
 	},
 	methods: {
-		removeItem(item) {
+		removeItem(item: any) {
 			// console.log('minus item: ', item);
-			this.$store.commit('removeItem', item);
+			store.commit('removeItem', item);
 		},
-		addItem(item) {
+		addItem(item: any) {
 			// console.log('add item: ', item);
-			this.$store.commit('addToCart', item);
+			store.commit('addToCart', item);
 		},
 
-		haha(pro) {
-			this.$store.commit('setProducts', pro);
+		haha(pro: any): any {
+			store.commit('setProducts', pro);
 		},
 		setCartProducts(products: any) {
 			console.log('setCartProducts: ', products);
@@ -99,20 +101,21 @@ export default {
 	},
 	async mounted() {
 		// todo: remove this temp codes for doing layout of cart.
-		const { getJsonData } = CommonMixin();
-		const { data } = await getJsonData('public/products.json');
-		console.log('mounted data: ', data);
+		const { getJsonData, theJson } = CommonMixin();
+		// const { data } = await getJsonData('public/products.json');
+		// console.log('mounted data: ', data);
+		const data = theJson;
 		this.haha(data);
 
-		this.$store.commit('addToCart', data[0]);
-		this.$store.commit('addToCart', data[0]);
-		this.$store.commit('addToCart', data[1]);
-		this.$store.commit('addToCart', data[1]);
-		this.$store.commit('addToCart', data[1]);
-		this.$store.commit('addToCart', data[2]);
-		this.$store.commit('addToCart', data[2]);
+		store.commit('addToCart', data[0]);
+		store.commit('addToCart', data[0]);
+		store.commit('addToCart', data[1]);
+		store.commit('addToCart', data[1]);
+		store.commit('addToCart', data[1]);
+		store.commit('addToCart', data[2]);
+		store.commit('addToCart', data[2]);
 	},
-};
+});
 </script>
 
 <style scoped>

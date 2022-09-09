@@ -15,7 +15,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import ImageContainer from './ImageContainer.vue';
 export default {
 	components: { ImageContainer },

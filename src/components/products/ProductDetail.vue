@@ -11,11 +11,16 @@
 	</div>
 </template>
 
-<script>
-import { mapActions } from 'vuex';
+<script lang="ts">
+import { mapActions, useStore } from 'vuex';
 import ImageContainer from './ImageContainer.vue';
+import { defineComponent, ref } from 'vue';
+import { ProductItem, State } from './types';
 
-export default {
+export default defineComponent({
+	setup() {
+		const store = useStore();
+	},
 	data() {
 		return {
 			product: Object,
@@ -27,7 +32,8 @@ export default {
 	props: ['productId'],
 	methods: {
 		addToCart() {
-			this.$store.commit('addToCart', this.product);
+			const store = useStore();
+			store.commit('addToCart', this.product);
 		},
 		...mapActions({
 			setCurProduct: 'setCurProduct',
@@ -51,7 +57,7 @@ export default {
 		console.log('ProductDetail route', this.$route);
 		console.log('productId: ', this.productId);
 	},
-};
+});
 </script>
 
 <style>

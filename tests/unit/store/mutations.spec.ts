@@ -5,7 +5,7 @@ import actions from '@/store/actions';
 import getters from '@/store/getters';
 import axios from 'axios';
 import productJson from '@/assets/products.json';
-import CommonMixin from '@/utils/CommonMixin.js';
+import CommonMixin from '@/utils/CommonMixin.ts';
 
 // import { game } from '@/store/game/game';
 // import store from '@/store';

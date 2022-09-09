@@ -1,75 +1,148 @@
-import { createStore } from 'vuex';
-// export interface ProductItem {
+import {
+	createStore,
+	MutationTree,
+	ActionContext,
+	ActionTree,
+	GetterTree,
+	Store as VuexStore,
+	CommitOptions,
+	DispatchOptions,
+	createLogger,
+} from 'vuex';
+
+//declare state
+export type State = { counter: number };
+
+//set state
+const state: State = { counter: 0 };
+
+// mutations and action enums
+
+export enum MutationTypes {
+  INC_COUNTER = "SET_COUNTER"
+}
+
+export enum ActionTypes {
+  INC_COUNTER = "SET_COUNTER"
+}
+
+//Mutation Types
+export type Mutations<S = State> = {
+  [MutationTypes.INC_COUNTER](state: S, payload: number): void;
+};
+
+//define mutations
+const mutations: MutationTree<State> & Mutations = {
+  [MutationTypes.INC_COUNTER](state: State, payload: number) {
+    state.counter += payload;
+  }
+};
+
+//actions
+
+type AugmentedActionContext = {
+  commit<K extends keyof Mutations>(
+    key: K,
+    payload: Parameters<Mutations[K]>[1]
+  ): ReturnType<Mutations[K]>;
+} & Omit<ActionContext<State, State>, "commit">;
+
+// actions interface
+
+export interface Actions {
+  [ActionTypes.INC_COUNTER](
+    { commit }: AugmentedActionContext,
+    payload: number
+  ): void;
+}
+
+export const actions: ActionTree<State, State> & Actions = {
+  [ActionTypes.INC_COUNTER]({ commit }, payload: number) {
+    commit(MutationTypes.INC_COUNTER, payload);
+  }
+};
+
+// Getters types
+export type Getters = {
+  doubleCounter(state: State): number;
+};
+
+//getters
+
+export const getters: GetterTree<State, State> & Getters = {
+  doubleCounter: state => {
+    console.log("state", state.counter);
+    return state.counter * 2;
+  }
+};
+
+//setup store type
+export type Store = Omit<
+	VuexStore<State>,
+	'commit' | 'getters' | 'dispatch'
+> & {
+	commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
+		key: K,
+		payload: P,
+		options?: CommitOptions
+	): ReturnType<Mutations[K]>;
+} & {
+	getters: {
+		[K in keyof Getters]: ReturnType<Getters[K]>;
+	};
+} & {
+	dispatch<K extends keyof Actions>(
+		key: K,
+		payload: Parameters<Actions[K]>[1],
+		options?: DispatchOptions
+	): ReturnType<Actions[K]>;
+};
+
+
+// import cartGetters from './getters';
+// import cartMutations from './mutations';
+// import cartActions from './actions';
+// // import State from './types';
+// import { ProductItem, State } from './types';
+
+// export type ProductItem = {
 // 	id: string;
-// 	name: null | string;
+// 	title: null | string;
 // 	count: number;
-// }
+// 	price: number;
+// };
 
-// export interface CartItems {
-// 	itemsInCart: ProductItem[];
-// }
-// export interface ProductsList {
+// export type ProductsList = {
 // 	productsList: ProductItem[];
-// }
-import cartGetters from './getters';
-import cartMutations from './mutations';
-import cartActions from './actions';
-// export interface State {
-// 	productsList: ProductItem[];
-// 	isLoggedIn: boolean;
-// 	itemsInCart: ProductItem[];
-// }
+// };
 
-export default createStore<State>({
-	// modules: {
-	// 	numbers: counterModule,
-	// },
-	// mutations: rootMutations,
-	// actions: rootActions,
-	// getters: rootGetters,
-	state() {
-		return {
-			count: 0,
-			productsList: [],
-			isLoggedIn: false,
-			curProduct: null,
-			itemsInCart: [],
-		};
-	},
-	mutations: cartMutations,
-	actions: cartActions,
-	getters: cartGetters,
+// // define your typings for the store state
+// export type State = {
+// 	isLoggedIn: false;
+// 	productsList: ProductItem[];
+// 	itemsInCart: ProductItem[];
+// };
+
+// const state: State = {
+// 	isLoggedIn: false,
+// 	productsList: [],
+// 	itemsInCart: [],
+// };
+
+// import { InjectionKey } from 'vue';
+// // define injection key
+// export const key: InjectionKey<Store<State>> = Symbol();
+
+
+export const store = createStore({
+	state,
+	mutations,
+	actions,
+	getters,
+	plugins: [createLogger()],
 });
 
-// https://stackoverflow.com/questions/34645731/export-more-than-one-variable-in-es6
+export function useStore() {
+	return store as Store;
+}
 
-// import { createStore } from 'vuex';
-// import { game } from './game/game';
-// import { mutations, Module1State } from './mutations';
-
-// const state = {
-// 	name: null,
-// 	count: 0,
-// } as Module1State;
-
-// export default createStore({
-// 	strict: process.env.NODE_ENV !== 'production', // strict only in dev since its resourcefully expensive-ish
-// 	modules: {
-// 		game,
-// 	},
-// 	state,
-// 	mutations,
-// });
-
-// const store = createStore({
-// 	// strict: process.env.NODE_ENV !== 'production', // strict only in dev since its resourcefully expensive-ish
-// 	strict: true,
-// 	modules: {
-// 		game,
-// 	},
-// 	state,
-// 	mutations,
-// });
-// console.log('local store: ', store);
-
-// export default store;

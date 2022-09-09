@@ -12,14 +12,20 @@
 
 <script lang="ts">
 import ProductCard from './ProductCard.vue';
-import { mapActions, mapGetters, mapState } from 'vuex';
-import CommonMixin from '@/utils/CommonMixin.js';
-
-export default {
+import { mapActions, useStore, mapGetters, mapState } from 'vuex';
+import CommonMixin from '@/utils/CommonMixin.ts';
+import { ProductItem, State } from './types';
+import { defineComponent, ref } from 'vue';
+import { store } from '@/store';
+export default defineComponent({
 	components: {
 		ProductCard,
 	},
 	computed: {
+		// getProducts() {
+		// 	const store = useStore();
+		// 	this.store;
+		// },
 		...mapGetters({ getProducts: 'getProducts' }),
 		...mapState(['productsList']),
 	},
@@ -29,10 +35,10 @@ export default {
 	methods: {
 		...mapActions({
 			setProducts: 'setProducts',
-			aliasPro: 'getProducts',
+			// aliasPro: 'getProducts',
 		}),
-		haha(pro) {
-			this.$store.commit('setProducts', pro);
+		haha(pro: any) {
+			store.commit('setProducts', pro);
 		},
 		// async fetchProducts() {
 		// 	const response = await axios.get('https://fakestoreapi.com/products');
@@ -62,7 +68,7 @@ export default {
 		console.log('mounted data: ', data);
 		this.haha(data);
 	},
-};
+});
 </script>
 
 <style>

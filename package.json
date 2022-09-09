@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite --port 4173",
 		"build": "vue-tsc --noEmit && vite build",
+		"deploy": "gh-pages -d build",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",
 		"preview": "vite preview --port 4173",
@@ -19,6 +20,7 @@
 		"@popperjs/core": "^2.11.6",
 		"axios": "^0.27.2",
 		"bootstrap": "^5.2.0",
+		"gh-pages": "^4.0.0",
 		"vue": "^3.2.37",
 		"vue-router": "^4.1.5",
 		"vuex": "^4.0.2"
