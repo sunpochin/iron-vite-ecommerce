@@ -1,14 +1,14 @@
 {
 	"name": "iron-vite-ecommerce",
 	"private": true,
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite --port 4173",
 		"build": "vue-tsc --noEmit && vite build",
 		"deploy": "gh-pages -d dist",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",
-		"preview": "vite preview --port 4173",
+		"preview": "vite preview --port 8080",
 		"test:unit": "vitest --environment jsdom",
 		"test:e2e": "start-server-and-test dev http://localhost:4173/ 'cypress open --e2e'",
 		"test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
