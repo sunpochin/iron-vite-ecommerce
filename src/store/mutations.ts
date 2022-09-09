@@ -1,14 +1,4 @@
-export interface ProductItem {
-	id: string;
-	name: null | string;
-	count: number;
-}
-
-export interface State {
-	productsList: ProductItem[];
-	isLoggedIn: boolean;
-	itemsInCart: ProductItem[];
-}
+import {State, ProductItem} from './types';
 
 export default {
 	setProducts(state: State, payload: ProductItem[]) {
@@ -17,7 +7,7 @@ export default {
 	},
 	// add an item into cart.
 	addToCart(state: State, payload: ProductItem) {
-		const index = state.itemsInCart.findIndex((idx) => {
+		const index = state.itemsInCart.findIndex((idx: any) => {
 			return idx.id === payload.id;
 		});
 		console.log('addToCart index: ', index);

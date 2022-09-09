@@ -3,7 +3,7 @@
 	<h1>{{ msg }}</h1>
 	<div class="outer">
 		<div class="product-list">
-			<div v-for="product in getProducts" :key="product.id">
+			<div v-for="product in listProducts" :key="product.id">
 				<ProductCard :product="product" />
 			</div>
 		</div>
@@ -12,15 +12,26 @@
 
 <script lang="ts">
 import ProductCard from './ProductCard.vue';
-import { mapActions, mapGetters, mapState } from 'vuex';
-import CommonMixin from '@/utils/CommonMixin.js';
-
-export default {
+import { mapActions, useStore, mapGetters, mapState } from 'vuex';
+import CommonMixin from '@/utils/CommonMixin';
+import { ProductItem, State } from '@/store/types';
+import { defineComponent, ref } from 'vue';
+import { store } from '@/store';
+export default defineComponent({
 	components: {
 		ProductCard,
 	},
 	computed: {
-		...mapGetters({ getProducts: 'getProducts' }),
+		// getProducts() {
+		// 	const store = useStore();
+		// 	this.store;
+		// },
+		listProducts() {
+			console.log('mama: ', store.getters.getProducts);
+			console.log('mama: ', store.getters.getProducts.data);
+			return store.getters.getProducts.data;
+		},
+		...mapGetters({ aliasPro: 'getProducts' }),
 		...mapState(['productsList']),
 	},
 	props: {
@@ -31,24 +42,10 @@ export default {
 			setProducts: 'setProducts',
 			aliasPro: 'getProducts',
 		}),
-		haha(pro) {
-			this.$store.commit('setProducts', pro);
+		haha(pro: any) {
+			store.commit('setProducts', pro);
+			console.log('aliasPro: ', store.getters.getProducts);
 		},
-		// async fetchProducts() {
-		// 	const response = await axios.get('https://fakestoreapi.com/products');
-		// 	// console.log('response: ', response);
-		// 	let data = response.data;
-		// 	console.log('fetch data: ', data);
-
-		// 	// data = data.filter(
-		// 	// 	(product) =>
-		// 	// 		product.category === `men's clothing` ||
-		// 	// 		product.category === `women's clothing`
-		// 	// );
-
-		// 	this.setProducts(data);
-		// 	return data;
-		// },
 	},
 	async mounted() {
 		console.log('loaded products: ', this.productsList);
@@ -56,13 +53,13 @@ export default {
 			console.log('fetch!!');
 			// this.fetchProducts();
 		}
-		const { getJsonData, retProductJson } = CommonMixin();
+		const { getJsonData, theJson } = CommonMixin();
 		// console.log('retProductJson: ', retProductJson);
-		const { data } = await getJsonData('public/products.json');
+		const data = await getJsonData('public/products.json');
 		console.log('mounted data: ', data);
 		this.haha(data);
 	},
-};
+});
 </script>
 
 <style>

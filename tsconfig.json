@@ -12,11 +12,9 @@
 		"esModuleInterop": true,
 		"lib": ["ESNext", "DOM"],
 		"skipLibCheck": true,
-		"paths": {
-			"@/*": ["./*"]
-		}
+		"paths": { "@/*": ["./src/*"] }
 	},
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "cypress/e2e/step_definitions/calculator.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "cypress/e2e/step_definitions/calculator.ts", "src/utils/CommonMixin.js"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

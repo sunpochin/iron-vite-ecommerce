@@ -5,7 +5,7 @@ import actions from '@/store/actions';
 import getters from '@/store/getters';
 import axios from 'axios';
 import productJson from '@/assets/products.json';
-import CommonMixin from '@/utils/CommonMixin.js';
+import CommonMixin from '@/utils/CommonMixin';
 
 // import { game } from '@/store/game/game';
 // import store from '@/store';
@@ -20,7 +20,7 @@ const productsState: ProductsList = {
 
 describe('Add product', () => {
 	beforeAll(async () => {
-		const { getJsonData } = CommonMixin();
+		const { getJsonData, theJson } = CommonMixin();
 		const dataMixin = await getJsonData('@/assets/products.json');
 		console.log('dataMixin: ', dataMixin);
 
