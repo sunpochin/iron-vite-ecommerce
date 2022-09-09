@@ -3,7 +3,7 @@
 <template>
 	<h1>Cart view</h1>
 
-	<!-- <table class="table">
+	<table class="table">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -22,7 +22,8 @@
 			<td>{{ item.price }}</td>
 			<td>{{ item.count }}</td>
 		</tr>
-	</table> -->
+	</table>
+
 	<div class=".cart-list" v-for="product in getCartProducts" :key="product.id">
 		<CartCard :cartItem="product" />
 	</div>
@@ -46,6 +47,8 @@
 
 <script lang="ts">
 import CartCard from './CartCard.vue';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import CommonMixin from '@/utils/CommonMixin.js';
 
 export default {
 	components: {
@@ -55,6 +58,7 @@ export default {
 		getCartProducts() {
 			return this.$store.getters.getCartItems;
 		},
+		...mapState(['productsList']),
 	},
 	data() {
 		return {
@@ -62,12 +66,29 @@ export default {
 		};
 	},
 	methods: {
+		haha(pro) {
+			this.$store.commit('setProducts', pro);
+		},
 		setCartProducts(products: any) {
 			console.log('setCartProducts: ', products);
 			this.productsInCart = products;
 		},
 	},
-	mounted() {},
+	async mounted() {
+		// todo: remove this temp codes for doing layout of cart.
+		const { getJsonData} = CommonMixin();
+		const { data } = await getJsonData('public/products.json');
+		console.log('mounted data: ', data);
+		this.haha(data);
+		
+		this.$store.commit('addToCart', data[0]);
+		this.$store.commit('addToCart', data[0]);
+		this.$store.commit('addToCart', data[1]);
+		this.$store.commit('addToCart', data[1]);
+		this.$store.commit('addToCart', data[1]);
+		this.$store.commit('addToCart', data[2]);
+		this.$store.commit('addToCart', data[2]);
+	},
 };
 </script>
 

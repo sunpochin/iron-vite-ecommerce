@@ -13,7 +13,7 @@
 <script lang="ts">
 import ProductCard from './ProductCard.vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
-import axios from 'axios';
+import CommonMixin from '@/utils/CommonMixin.js';
 
 export default {
 	components: {
@@ -31,35 +31,36 @@ export default {
 			setProducts: 'setProducts',
 			aliasPro: 'getProducts',
 		}),
-		async fetchProducts() {
-			const response = await axios.get('https://fakestoreapi.com/products');
-			// console.log('response: ', response);
-			let data = response.data;
-			console.log('fetch data: ', data);
-
-			// data = data.filter(
-			// 	(product) =>
-			// 		product.category === `men's clothing` ||
-			// 		product.category === `women's clothing`
-			// );
-
-			this.setProducts(data);
-			return data;
+		haha(pro) {
+			this.$store.commit('setProducts', pro);
 		},
+		// async fetchProducts() {
+		// 	const response = await axios.get('https://fakestoreapi.com/products');
+		// 	// console.log('response: ', response);
+		// 	let data = response.data;
+		// 	console.log('fetch data: ', data);
+
+		// 	// data = data.filter(
+		// 	// 	(product) =>
+		// 	// 		product.category === `men's clothing` ||
+		// 	// 		product.category === `women's clothing`
+		// 	// );
+
+		// 	this.setProducts(data);
+		// 	return data;
+		// },
 	},
-	mounted() {
+	async mounted() {
 		console.log('loaded products: ', this.productsList);
 		if (this.productsList.length === 0) {
 			console.log('fetch!!');
-			this.fetchProducts();
+			// this.fetchProducts();
 		}
-		// console.log('this.dondon: ', this.dondon);
-		// console.log('this.dondon length: ', this.dondon.length);
-		// console.log('this.aliasPro: ', this.aliasPro);
-		// console.log('this.aliasPro length: ', this.aliasPro.length);
-		// if (this.products.length === 0) {
-		// 	this.fetchProducts();
-		// }
+		const { getJsonData, retProductJson } = CommonMixin();
+		// console.log('retProductJson: ', retProductJson);
+		const { data } = await getJsonData('public/products.json');
+		console.log('mounted data: ', data);
+		this.haha(data);
 	},
 };
 </script>

@@ -4,7 +4,8 @@ import mutations from '@/store/mutations';
 import actions from '@/store/actions';
 import getters from '@/store/getters';
 import axios from 'axios';
-import productJson from '@/assets/products.json'
+import productJson from '@/assets/products.json';
+import CommonMixin from '@/utils/CommonMixin.js';
 
 // import { game } from '@/store/game/game';
 // import store from '@/store';
@@ -19,6 +20,10 @@ const productsState: ProductsList = {
 
 describe('Add product', () => {
 	beforeAll(async () => {
+		const { getJsonData } = CommonMixin();
+		const dataMixin = await getJsonData('@/assets/products.json');
+		console.log('dataMixin: ', dataMixin);
+
 		console.log('before all');
 		// use local data instead, faster.
 		let data = productJson;
