@@ -7,7 +7,7 @@
 	<div class="upmost">
 		<div class="logo">Fashion shop</div>
 		<nav>
-			<router-link to="/">首頁</router-link>
+			<router-link to="/iron-vite-ecommerce">首頁</router-link>
 			<router-link to="/products">產品列表</router-link>
 			<router-link to="/cart">購物車</router-link>
 			<router-link to="/login">登入/註冊</router-link>
@@ -64,7 +64,7 @@ nav {
 
 nav a:hover {
 	transition: transform 0.9s ease-in-out;
-	transform: scale(1.);
+	transform: scale(1);
 	color: rgb(13, 195, 13);
 }
 

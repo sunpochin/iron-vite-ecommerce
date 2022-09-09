@@ -11,7 +11,7 @@ const router = createRouter({
 	history: createWebHistory('/'),
 	routes: [
 		{
-			path: '/',
+			path: '/iron-vite-ecommerce',
 			component: HomeView,
 		},
 		{

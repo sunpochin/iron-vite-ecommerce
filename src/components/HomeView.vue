@@ -4,8 +4,9 @@
 	<div class="wrapper">
 		<div id="description">秋冬特惠 任選 168 起</div>
 		<div class="img-wrapper">
-			<a href="/products"><img src="@/assets/artem-beliaikin-49mCO5ZRQDk-unsplash.jpg" alt=""
-			/></a>
+			<router-link to="/products"><img src="@/assets/artem-beliaikin-49mCO5ZRQDk-unsplash.jpg"
+				alt=""/></router-link>
+
 		</div>
 	</div>
 	<!-- https://unsplash.com/photos/_KaMTEmJnxY -->
