@@ -9,8 +9,11 @@ export default {
 		console.log('addToCart: ', payload);
 		context.commit('addToCart', payload);
 	},
+	removeItem(context, payload) {
+		context.commit('removeItem', payload);
+	},
 
-  login(context) {
+	login(context) {
 		context.commit('setLoggedIn', { value: true });
 	},
 	logout(context) {

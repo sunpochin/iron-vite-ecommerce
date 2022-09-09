@@ -1,48 +1,59 @@
 <script setup lang="ts"></script>
 
 <template>
-	<h1>Cart view</h1>
-
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">title</th>
-				<th scope="col">img</th>
-				<th scope="col">description</th>
-				<th scope="col">price</th>
-				<th scope="col">count</th>
+	<div class="containerTable">
+		<table>
+			<thead>
+				<tr class="clstr">
+					<th scope="col">
+						<div>
+							<label class="containerCheckbox cartProduct">
+								<input type="checkbox" id="regular" name="optradio"
+							/></label>
+						</div>
+					</th>
+					<th scope="col">縮圖</th>
+					<th scope="col">品名</th>
+					<!-- <th scope="col">
+						<div class="containerDesc">description</div>
+					</th> -->
+					<th scope="col">價格</th>
+					<th scope="col">數量</th>
+				</tr>
+			</thead>
+			<tr v-for="item in getCartProducts" :key="item.id">
+				<td>
+					<div>
+						<label class="containerCheckbox cartProduct">
+							<input type="checkbox" id="regular" name="optradio"
+						/></label>
+					</div>
+				</td>
+				<td>
+					<div class="containerImg">
+						<img :src="item.image" />
+					</div>
+				</td>
+				<td>{{ item.title }}</td>
+				<!-- <td>
+					<div class="containerDesc">
+						{{ item.description }}
+					</div>
+				</td> -->
+				<td>{{ item.price }}</td>
+				<td>
+					<div class="clsCount">
+						<button @click="removeItem(item)">-</button>
+						{{ item.count }}
+						<button @click="addItem(item)">+</button>
+					</div>
+				</td>
 			</tr>
-		</thead>
-		<tr v-for="item in getCartProducts" :key="item.id">
-			<td>{{ item.id }}</td>
-			<td>{{ item.title }}</td>
-			<td><img :src="item.image" /></td>
-			<td>{{ item.description }}</td>
-			<td>{{ item.price }}</td>
-			<td>{{ item.count }}</td>
-		</tr>
-	</table>
-
-	<div class=".cart-list" v-for="product in getCartProducts" :key="product.id">
-		<CartCard :cartItem="product" />
+		</table>
 	</div>
-	<!-- <button
-		class="btn btn-primary"
-		data-bs-target="#collapseTarget"
-		data-bs-toggle="collapse"
-	>
-		Bootstrap collapse
-	</button>
-	<div class="collapse py-2" id="collapseTarget">
-		This is the toggle-able content!
-	</div> -->
-
-	<!-- <div class="cart-list">
-		<div v-for="cartItem in getCartProducts" :key="cartItem.id">
-			<CartCard :cartItem="cartItem" />
-		</div>
-	</div> -->
+	<div class="clsSubtotal">
+		<h2>Subtotal: {{ getSubTotal }}</h2>
+	</div>
 </template>
 
 <script lang="ts">
@@ -55,6 +66,9 @@ export default {
 		CartCard,
 	},
 	computed: {
+		getSubTotal() {
+			return this.$store.getters.getSubTotal;
+		},
 		getCartProducts() {
 			return this.$store.getters.getCartItems;
 		},
@@ -66,6 +80,15 @@ export default {
 		};
 	},
 	methods: {
+		removeItem(item) {
+			// console.log('minus item: ', item);
+			this.$store.commit('removeItem', item);
+		},
+		addItem(item) {
+			// console.log('add item: ', item);
+			this.$store.commit('addToCart', item);
+		},
+
 		haha(pro) {
 			this.$store.commit('setProducts', pro);
 		},
@@ -76,11 +99,11 @@ export default {
 	},
 	async mounted() {
 		// todo: remove this temp codes for doing layout of cart.
-		const { getJsonData} = CommonMixin();
+		const { getJsonData } = CommonMixin();
 		const { data } = await getJsonData('public/products.json');
 		console.log('mounted data: ', data);
 		this.haha(data);
-		
+
 		this.$store.commit('addToCart', data[0]);
 		this.$store.commit('addToCart', data[0]);
 		this.$store.commit('addToCart', data[1]);
@@ -93,9 +116,38 @@ export default {
 </script>
 
 <style scoped>
+/* https://www.google.com/search?q=how+to+make+a+round+checkbox+with+check+mark&client=ubuntu&hs=5Pr&channel=fs&sxsrf=ALiCzsYBd-_g38CzBPg_4kLbQaLmNWZ8xQ%3A1662686596298&ei=hJUaY9jsEcCFr7wPxuCWqAs&ved=0ahUKEwjYvsefxob6AhXAwosBHUawBbUQ4dUDCA0&uact=5&oq=how+to+make+a+round+checkbox+with+check+mark&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABOgoIABBHENYEELADOgcIIRCgARAKSgQIQRgASgQIRhgAUO8IWP0PYNIRaAJwAXgAgAG_AYgB7giSAQMzLjeYAQCgAQHIAQrAAQE&sclient=gws-wiz  
+
+https://stackoverflow.com/questions/29617200/how-to-make-checkboxes-rounded
+
+*/
+
+.containerTable {
+	margin: 2rem;
+}
+
+button {
+	margin: 15px;
+}
+
+.clsCount {
+	width: 250px;
+}
+.containerImg {
+	max-width: 100px;
+}
+
+.containerDesc {
+	max-width: 100px;
+}
+.clstr {
+	border: 1px solid red;
+	background-color: grey;
+}
 td,
 th {
 	border: 1px solid grey;
+	padding: 1rem;
 }
 .cart-list {
 	display: flex;

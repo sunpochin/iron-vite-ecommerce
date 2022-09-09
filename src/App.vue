@@ -5,12 +5,12 @@
 
 <template>
 	<div class="upmost">
-		<div class="logo">Pseudo shop</div>
+		<div class="logo">Fashion shop</div>
 		<nav>
-			<router-link to="/">訂閱電子報</router-link>
-			<router-link to="/products">Products</router-link>
-			<router-link to="/cart">Cart</router-link>
-			<router-link to="/login">Login</router-link>
+			<router-link to="/">首頁</router-link>
+			<router-link to="/products">產品列表</router-link>
+			<router-link to="/cart">購物車</router-link>
+			<router-link to="/login">登入/註冊</router-link>
 		</nav>
 	</div>
 	<router-view />

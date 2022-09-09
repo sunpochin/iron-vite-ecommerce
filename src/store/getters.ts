@@ -1,23 +1,28 @@
 export default {
 	getTotalCount(state) {
-		const result = state.itemsInCart.reduce((acc, currentValue) => {
+		return state.itemsInCart.reduce((acc, curItem) => {
 			console.log('acc: ', acc);
-			console.log('currentValue: ', currentValue.count);
-			return acc + currentValue.count;
+			console.log('curItem: ', curItem.count);
+			return acc + curItem.count;
 		}, 0);
-		console.log('result: ', result);
-		return result;
+		// console.log('result: ', result);
+		// return result;
 	},
 
 	// get the count of categories in cart.
 	getCategoryCount(state) {
 		return state.itemsInCart.length;
 	},
-
+	getSubTotal(state) {
+		console.log('getSubTotal');
+		return state.itemsInCart.reduce((acc, curItem) => {
+			return acc + curItem.price;
+		}, 0);
+		// return subTotal;
+	},
 	getCartItems(state) {
 		return state.itemsInCart;
 	},
-
 	// get the count
 	getCountBy(state, payload) {
 		const index = state.itemsInCart.findIndex((idx) => {

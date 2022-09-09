@@ -17,6 +17,9 @@ export default {
 	},
 	// add an item into cart.
 	addToCart(state: State, payload: ProductItem) {
+		let itemsInCart = [state.itemsInCart];
+
+
 		const index = state.itemsInCart.findIndex((idx) => {
 			return idx.id === payload.id;
 		});
@@ -24,6 +27,7 @@ export default {
 		if (index > -1) {
 			console.log('state.itemsInCart: ', state.itemsInCart);
 			state.itemsInCart[index].count++;
+			state.itemsInCart = state.itemsInCart;
 			console.log(
 				'state.itemsInCart[index].count: ',
 				state.itemsInCart[index].count
@@ -33,6 +37,31 @@ export default {
 			// [...state.itemsInCart, payload];
 			// console.log('newitem: ', newitem);
 
+			console.log('payload: ', payload);
+			state.itemsInCart.push(payload);
+		}
+		// console.log('itemsInCart: ', state.itemsInCart);
+	},
+	removeItem(state: State, payload: ProductItem) {
+		const index = state.itemsInCart.findIndex((idx) => {
+			return idx.id === payload.id;
+		});
+		// console.log('removeItem index: ', index);
+		if (index > -1) {
+			console.log('state.itemsInCart: ', state.itemsInCart);
+			state.itemsInCart[index].count--;
+			if (state.itemsInCart[index].count <= 0) {
+				state.itemsInCart.splice(index, 1);
+			}
+			state.itemsInCart = state.itemsInCart;
+			// console.log(
+			// 	'state.itemsInCart[index].count: ',
+			// 	state.itemsInCart[index].count
+			// );
+		} else {
+			payload.count = 1;
+			// [...state.itemsInCart, payload];
+			// console.log('newitem: ', newitem);
 			console.log('payload: ', payload);
 			state.itemsInCart.push(payload);
 		}
